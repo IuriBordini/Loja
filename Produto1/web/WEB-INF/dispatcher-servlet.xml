@@ -18,11 +18,11 @@
     <mvc:annotation-driven />
     <context:component-scan base-package="sistema.controller"/>
     <!--Interceptor controller 2º passo-->
-    <!-- Desativando Interceptor
+     
     <mvc:interceptors>
       <bean class="sistema.controller.InterceptorSistema" />
     </mvc:interceptors>
-    -->
+   
     
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"

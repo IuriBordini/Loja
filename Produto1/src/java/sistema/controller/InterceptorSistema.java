@@ -13,8 +13,8 @@ public class InterceptorSistema  extends HandlerInterceptorAdapter{
 		String url = request.getRequestURI();
 		// Páginas permitidas para acesso sem login 
 		if(
-                                url.endsWith("/")
-				|| url.endsWith("EfetuarLogin")
+                                url.endsWith("/loja/")
+				|| url.endsWith("/logar")
                         	|| url.contains("resource")
                                 
                                 )

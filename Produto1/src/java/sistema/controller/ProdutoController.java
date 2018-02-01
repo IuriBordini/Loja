@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sistema.modelo.Produto;
 
@@ -15,7 +16,7 @@ import sistema.modelo.ProdutoDao;
 @Controller
 @RequestMapping("/produto")
 public class ProdutoController {
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public String produtos(Model model){
         ProdutoDao dao = new ProdutoDao();
         model.addAttribute("dados", dao.getProdutos());
@@ -47,12 +48,18 @@ public class ProdutoController {
         ProdutoDao dao = new ProdutoDao();
          dao.excluir(id);
         ra.addFlashAttribute("mensagem","Excluido com sucesso");
-        return "produto";
+        return "redirect:/produto";
 }
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
     public String cadastro() {
     
        return "produto-new";
 }
-}
+     @RequestMapping(value = "/pesquisa", method = RequestMethod.GET)
+    public String pesquisaPorNome(@RequestParam String nome, Model model) {
+    ProdutoDao dao = new ProdutoDao();
+        model.addAttribute("dados", dao.pesquisaProdutos(nome));
+       return "produtos";
+    }
+    }
     

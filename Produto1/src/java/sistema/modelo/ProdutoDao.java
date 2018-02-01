@@ -28,7 +28,7 @@ public class ProdutoDao extends Conexao{
            try{
           String sql = "select * from produto";
           PreparedStatement st = getConnection().prepareStatement(sql);
-               ResultSet rs = st.executeQuery(sql);
+               ResultSet rs = st.executeQuery();
                 List<Produto> lista = new ArrayList<Produto>();
                
                while(rs.next()){
@@ -95,6 +95,30 @@ public class ProdutoDao extends Conexao{
                     e.printStackTrace();
                 }
             }
+
+    public List<Produto> pesquisaProdutos(String nome) {
+         try{
+          String sql = "select * from produto where nome like ?";
+          PreparedStatement st = getConnection().prepareStatement(sql);
+          st.setString(1,nome+"%");
+          ResultSet rs = st.executeQuery();
+                List<Produto> lista = new ArrayList<Produto>();
+               
+               while(rs.next()){
+                   Produto p = new Produto();
+                   p.setId(rs.getLong(1));
+                   p.setNome(rs.getString(2));
+                   p.setPreco(rs.getDouble(3));
+                   p.setDescricao(rs.getString(4));
+                   lista.add(p);
+               }
+               return lista;
+               
+      }  catch(Exception e){
+          e.printStackTrace();
+          return null;
+      }
+    }
             
 }
 
