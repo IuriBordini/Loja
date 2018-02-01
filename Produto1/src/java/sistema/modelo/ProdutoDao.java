@@ -10,6 +10,20 @@ import java.util.List;
 
 
 public class ProdutoDao extends Conexao{
+    private int pagina;
+
+    public int getPagina() {
+        return pagina;
+    }
+
+    public void setPagina(int pagina) {
+        if(pagina == 1)
+            this.pagina = 0;
+        else
+            this.pagina = (pagina-1)*5;
+       
+    }
+    
     public void cadastrar(Produto produto){
       try{
           String sql = "insert into produto values(default,?,?,?)";
@@ -26,8 +40,9 @@ public class ProdutoDao extends Conexao{
     public List <Produto> getProdutos(){
         
            try{
-          String sql = "select * from produto";
+          String sql = "select * from produto limit ?,5";
           PreparedStatement st = getConnection().prepareStatement(sql);
+          st.setInt(1,pagina);
                ResultSet rs = st.executeQuery();
                 List<Produto> lista = new ArrayList<Produto>();
                
@@ -98,9 +113,10 @@ public class ProdutoDao extends Conexao{
 
     public List<Produto> pesquisaProdutos(String nome) {
          try{
-          String sql = "select * from produto where nome like ?";
+          String sql = "select * from produto where nome like ? limit ?,5";
           PreparedStatement st = getConnection().prepareStatement(sql);
           st.setString(1,nome+"%");
+           st.setInt(2,pagina);
           ResultSet rs = st.executeQuery();
                 List<Produto> lista = new ArrayList<Produto>();
                

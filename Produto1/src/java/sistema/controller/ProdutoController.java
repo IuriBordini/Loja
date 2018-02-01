@@ -17,8 +17,9 @@ import sistema.modelo.ProdutoDao;
 @RequestMapping("/produto")
 public class ProdutoController {
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public String produtos(Model model){
+    public String produtos(@RequestParam (value = "pagina",defaultValue = "1") int pag, Model model){
         ProdutoDao dao = new ProdutoDao();
+        dao.setPagina(pag);
         model.addAttribute("dados", dao.getProdutos());
         return "produtos";
     }
