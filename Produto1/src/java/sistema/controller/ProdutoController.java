@@ -86,6 +86,13 @@ public class ProdutoController {
                     }
                 }
                 if (add) lista.add(item);
+               //subtotal
+                double subtotal = 0;
+                for(ItemPedido i : lista){
+                    subtotal += i.getProduto().getPreco() * i.getQuantidade();
+                }
+                sessao.setAttribute("total", subtotal);
+                //fim subtotal
                 sessao.setAttribute("carrinho", lista);
                 return "redirect:/produto";
                 
@@ -93,6 +100,10 @@ public class ProdutoController {
             @RequestMapping(value = "/carrinho",method= RequestMethod.GET)
             public String carrinho(){
                 return "carrinho";
+            }
+            @RequestMapping(value = "/removeItem/{id}", method = RequestMethod.GET)
+            public String addItem(@PathVariable long id,HttpSession sessao,Model model){
+                return "redirect:/produto/carrinho";
             }
     }
     

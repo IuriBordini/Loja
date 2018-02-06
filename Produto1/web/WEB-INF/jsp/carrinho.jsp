@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -37,16 +37,24 @@
                     <tr>
                         <td>${carrinho.produto.id}</td>
                         <td>${carrinho.produto.nome}</td>
-                        <td>${carrinho.produto.preco}</td>
+                        
+                        <td><fmt:formatNumber type="currency" value="${carrinho.produto.preco}"></fmt:formatNumber></td>
                         <td>${carrinho.produto.descricao}</td>
                         <td>${carrinho.quantidade}</td>
+                        
                         <td><a href="/loja/produto/${carrinho.produto.id}">Alterar</a></td>
                         <td><a href="/loja/produto/removeItem/${carrinho.produto.id}">Excluir</a></td>
                     </tr>
                     
                 </c:forEach>
+                     <tr>
+                    <td colspan="5"></td>
+                <td > Total </td>
+                <td ><fmt:formatNumber type="currency" value=" ${total}"></fmt:formatNumber> </td>
+            </tr>
             </table>
-
+           
+                
 
             </section>
 
