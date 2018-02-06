@@ -1,4 +1,7 @@
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix ="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <nav class="navbar navbar-default">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -18,7 +21,7 @@
         <li><a href="/loja/produto/cadastro">Novo Produto</a></li>
         <li><a href="/loja/produto/">Lista de  produtos</a></li>
         <li><a href="/loja/sair">${funcionario} | Sair</a></li>
-
+        <li><a href="/loja/produto/carrinho"> ${fn:length(carrinho)}   Itens</a></li>
       </ul>
       <form class="navbar-form navbar-right "action="/loja/produto/pesquisa"method ="GET">
         <div class="form-group">

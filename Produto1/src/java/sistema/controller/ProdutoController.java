@@ -1,6 +1,9 @@
 
 package sistema.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import sistema.modelo.ItemPedido;
 import sistema.modelo.Produto;
 
 import sistema.modelo.ProdutoDao;
@@ -62,5 +66,33 @@ public class ProdutoController {
         model.addAttribute("dados", dao.pesquisaProdutos(nome));
        return "produtos";
     }
+            @RequestMapping (value = "/addItem",method =RequestMethod.POST)
+            public String logar (long idProduto,int quantidade,HttpSession sessao, Model model){
+                List<ItemPedido> lista;
+                if(sessao.getAttribute("carrinho")==null){
+                    lista = new ArrayList<ItemPedido>();
+                }else{
+                    lista = (List<ItemPedido>)sessao.getAttribute("carrinho");                 
+                }
+                ProdutoDao dao = new ProdutoDao();
+                ItemPedido item = new ItemPedido();
+                item.setProduto(dao.produtoId(idProduto));
+                item.setQuantidade(quantidade);
+                boolean add = true;
+                for(ItemPedido i : lista) {
+                    if(i.getProduto().getId()==idProduto){
+                        i.setQuantidade(quantidade);
+                        add = false;
+                    }
+                }
+                if (add) lista.add(item);
+                sessao.setAttribute("carrinho", lista);
+                return "redirect:/produto";
+                
+            }
+            @RequestMapping(value = "/carrinho",method= RequestMethod.GET)
+            public String carrinho(){
+                return "carrinho";
+            }
     }
     

@@ -65,7 +65,23 @@
 
                     </fieldset>
                 </form>  
+                                        <form class="form-horizontal" action="/loja/produto/addItem" method="POST">
+                    <input type="hidden" name="idProduto" id="idProduto" value="${produto.id}">
+                     <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Quantidade">Quantidade</label>  
+                            <div class="col-md-4">
+                                <input value="1" id="quantidade" name="quantidade" type="number" placeholder="" class="form-control input-md" required="">
 
+                            </div>
+                        </div>
+                     <div class="form-group">
+                            <label class="col-md-4 control-label" for="botao"></label>
+                            <div class="col-md-4">
+                                <button id="botao" name="botao" class="btn btn-primary">Adicinar</button>
+                            </div>
+                        </div>
+                      </form>  
 
             </section>
 
