@@ -19,7 +19,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="/loja/produto/cadastro">Novo Produto</a></li>
+         <li><a href="/loja/usuario/cadastrar">Cadastro Usuario</a></li>
         <li><a href="/loja/produto/">Lista de  produtos</a></li>
+       
         <li><a href="/loja/sair">${funcionario} | Sair</a></li>
         <li><a href="/loja/produto/carrinho"> ${fn:length(carrinho)}   Itens</a></li>
       </ul>
