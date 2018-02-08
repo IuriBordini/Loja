@@ -28,4 +28,10 @@ public class UsuarioController {
         model.addAttribute("mensagem","Cadastrado com sucesso");
         return "cadastro-usuario";
     }
+    public String listar (Usuario usuario , Model model){
+       UsuarioDao dao = new UsuarioDao();
+        
+        model.addAttribute("dados", dao.getUsuario());
+        return "usuarios";
+    }
 }

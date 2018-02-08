@@ -4,6 +4,8 @@ package sistema.modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -41,5 +43,29 @@ public class UsuarioDao extends Conexao {
           
       }
     }
-    
+     public List <Usuario> getUsuario(){
+        
+           try{
+          String sql = "select * from usuario limit ?,5";
+          PreparedStatement st = getConnection().prepareStatement(sql);
+        
+               ResultSet rs = st.executeQuery();
+                List<Usuario> lista = new ArrayList<Usuario>();
+               
+               while(rs.next()){
+                   Usuario p = new Usuario();
+                 
+                   p.setNome(rs.getString(1));
+                  
+                   p.setSenha(rs.getString(2));
+                   lista.add(p);
+               }
+               return lista;
+               
+      }  catch(Exception e){
+          e.printStackTrace();
+          return null;
+      }
+        
+    }
 }
